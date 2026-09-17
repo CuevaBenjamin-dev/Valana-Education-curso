@@ -1,0 +1,190 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Privacidad | ESCS"
+  description="Información sobre privacidad, preferencias de medición y servicios externos del curso de IA y digitalización de ESCS."
+  noindex
+>
+  <Header />
+  <main id="main-content" class="privacy-page">
+    <div class="privacy-container">
+      <a class="back-link" href="/">
+        <span aria-hidden="true">↗</span> Volver al curso
+      </a>
+
+      <header class="privacy-heading">
+        <p class="eyebrow">ESCS / Información del sitio</p>
+        <h1>Tu privacidad.<br /><span>Tus decisiones.</span></h1>
+        <p class="intro">Aquí explicamos qué ocurre cuando visitas esta página y cómo puedes decidir sobre la medición de tu visita.</p>
+      </header>
+
+      <aside class="draft-note" aria-labelledby="draft-title">
+        <span class="status-dot" aria-hidden="true"></span>
+        <div>
+          <h2 id="draft-title">Documento pendiente de revisión</h2>
+          <p>Esta es una plantilla informativa. Antes de publicar el sitio, ESCS debe completar y validar la identidad del responsable, sus datos de contacto, la jurisdicción aplicable y los plazos de conservación. Los campos pendientes se indican expresamente.</p>
+        </div>
+      </aside>
+
+      <div class="privacy-grid">
+        <nav class="page-index" aria-label="Contenido de la política de privacidad">
+          <p class="eyebrow">En esta página</p>
+          <ol>
+            <li><a href="#responsable">Responsable</a></li>
+            <li><a href="#datos">Información tratada</a></li>
+            <li><a href="#preferencias">Tus preferencias</a></li>
+            <li><a href="#almacenamiento">Almacenamiento</a></li>
+            <li><a href="#servicios">Servicios externos</a></li>
+            <li><a href="#contacto">Contacto y solicitudes</a></li>
+          </ol>
+        </nav>
+
+        <div class="privacy-content">
+          <section id="responsable" aria-labelledby="responsable-title">
+            <span class="section-number" aria-hidden="true">01</span>
+            <h2 id="responsable-title">Quién es responsable</h2>
+            <p>ESCS es el nombre presentado en este sitio. Los siguientes datos deben confirmarse antes de su publicación:</p>
+            <dl class="pending-details">
+              <div><dt>Identidad legal del responsable</dt><dd>Pendiente de completar</dd></div>
+              <div><dt>Domicilio y país</dt><dd>Pendiente de completar</dd></div>
+              <div><dt>Contacto de privacidad</dt><dd>Pendiente de completar</dd></div>
+              <div><dt>Jurisdicción aplicable</dt><dd>Pendiente de revisión</dd></div>
+              <div><dt>Fecha de última revisión</dt><dd>Pendiente de validación</dd></div>
+            </dl>
+          </section>
+
+          <section id="datos" aria-labelledby="datos-title">
+            <span class="section-number" aria-hidden="true">02</span>
+            <h2 id="datos-title">Qué información se utiliza</h2>
+            <p>Esta landing presenta el curso de IA y digitalización. No contiene un formulario de registro ni un sistema propio de recepción de solicitudes. El contacto se realiza mediante un enlace a WhatsApp que tú decides abrir.</p>
+            <p>La página conserva tu elección de consentimiento para recordar tus preferencias. Esta función esencial no activa rastreadores ni envía información a servicios de analítica o publicidad.</p>
+            <p>Si aceptas la medición y las herramientas están configuradas, Microsoft Clarity puede medir el uso de la página y Meta Pixel puede registrar visitas e interacciones para evaluar campañas. Estos proveedores pueden tratar información del dispositivo, navegador, dirección IP e interacción según sus propias condiciones y configuración.</p>
+            <p>Solo con tu consentimiento se guardan durante la sesión parámetros de campaña UTM saneados, si existen en la dirección de entrada. Se utilizan para reconocer el origen de una visita; no se solicita que incluyas datos personales en ellos.</p>
+            <p>El proveedor de alojamiento puede generar registros técnicos al servir la página. Su identidad, el alcance de esos registros y sus plazos de conservación están pendientes de confirmar.</p>
+          </section>
+
+          <section id="preferencias" aria-labelledby="preferencias-title">
+            <span class="section-number" aria-hidden="true">03</span>
+            <h2 id="preferencias-title">Tú eliges si se mide tu visita</h2>
+            <p>Microsoft Clarity y Meta Pixel solo se activan después de aceptar. Puedes rechazar las herramientas opcionales y seguir consultando la información del curso.</p>
+            <p>Puedes volver a abrir las preferencias desde el enlace del pie de página o desde este botón:</p>
+            <button type="button" class="preferences-button" data-consent-settings>
+              Gestionar mis preferencias <span aria-hidden="true">↗</span>
+            </button>
+            <p>Al retirar tu consentimiento, la página elimina su almacenamiento analítico propio y las cookies de seguimiento de primera parte a las que tiene acceso. Después recarga la página para detener los scripts que estuvieran activos. Las nuevas visitas se regirán por tu elección actualizada.</p>
+            <p>Esta acción no puede borrar información que ya hayan recibido los proveedores ni cookies de otros dominios. Puedes gestionar esos datos mediante las opciones de privacidad del proveedor y los controles de tu navegador.</p>
+          </section>
+
+          <section id="almacenamiento" aria-labelledby="almacenamiento-title">
+            <span class="section-number" aria-hidden="true">04</span>
+            <h2 id="almacenamiento-title">Qué queda en tu navegador</h2>
+            <dl class="storage-details">
+              <div>
+                <dt>Tu elección de privacidad</dt>
+                <dd>Se almacena localmente en el navegador mediante <code>localStorage</code> para recordar si has aceptado o rechazado las herramientas opcionales. Puedes cambiarla desde las preferencias o eliminarla al borrar los datos del sitio.</dd>
+              </div>
+              <div>
+                <dt>Origen de la campaña</dt>
+                <dd>Con consentimiento, los parámetros UTM admitidos y saneados pueden guardarse mediante <code>sessionStorage</code> durante la sesión de navegación. Se eliminan al retirar el consentimiento.</dd>
+              </div>
+              <div>
+                <dt>Cookies y datos de proveedores</dt>
+                <dd>Clarity y Meta pueden utilizar cookies u otros identificadores cuando se activan. Los nombres, duraciones y condiciones concretas deben revisarse con la configuración final de cada proveedor antes de publicar.</dd>
+              </div>
+            </dl>
+            <p>Los plazos de conservación de la información que reciben los proveedores y de las consultas por WhatsApp están pendientes de definición por el responsable.</p>
+          </section>
+
+          <section id="servicios" aria-labelledby="servicios-title">
+            <span class="section-number" aria-hidden="true">05</span>
+            <h2 id="servicios-title">Servicios externos</h2>
+            <p>Al pulsar un enlace de WhatsApp, sales de esta página para iniciar voluntariamente una conversación. WhatsApp trata la información conforme a sus propias condiciones; cualquier mensaje que envíes se comparte con el destinatario de la conversación.</p>
+            <p>Las prácticas de los servicios utilizados se describen en sus políticas oficiales:</p>
+            <ul class="provider-links">
+              <li><a href="https://privacy.microsoft.com/es-es/privacystatement" target="_blank" rel="noopener noreferrer">Privacidad de Microsoft <span class="new-tab">(abre otra pestaña)</span><span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">Privacidad de Meta <span class="new-tab">(abre otra pestaña)</span><span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Privacidad de WhatsApp <span class="new-tab">(abre otra pestaña)</span><span aria-hidden="true">↗</span></a></li>
+            </ul>
+            <p>El responsable debe revisar y completar la información relativa a destinatarios, ubicación del tratamiento y posibles transferencias internacionales según los servicios finalmente contratados.</p>
+          </section>
+
+          <section id="contacto" aria-labelledby="contacto-title">
+            <span class="section-number" aria-hidden="true">06</span>
+            <h2 id="contacto-title">Contacto y solicitudes</h2>
+            <p>El canal para las consultas de privacidad y las solicitudes relativas a tus datos está <strong>pendiente de completar</strong>. ESCS debe proporcionar un contacto operativo y definir el procedimiento y los plazos de respuesta antes de publicar esta política.</p>
+            <p>Los derechos aplicables, la información sobre la autoridad competente y las bases para el tratamiento deben revisarse conforme al país y a la identidad legal del responsable. Esta plantilla no establece ni acredita cumplimiento normativo.</p>
+          </section>
+
+          <a class="back-link bottom-back" href="/">Volver a conocer el curso <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .privacy-page { background: #f2f0e9; color: #20221f; padding: 150px 0 104px; }
+  .privacy-container { max-width: 1280px; margin-inline: auto; padding-inline: clamp(22px, 4.4vw, 72px); }
+  .back-link { display: inline-flex; align-items: center; gap: 12px; color: #20221f; font: 600 12px/1.5 var(--font-body, sans-serif); text-decoration: none; border-bottom: 1px solid #a6aa9e; padding-block: 5px; }
+  .back-link:hover { border-color: #20221f; }
+  .privacy-heading { padding-block: 56px 38px; }
+  .eyebrow { font: 700 10px/1.5 var(--font-body, sans-serif); letter-spacing: .18em; text-transform: uppercase; }
+  h1 { margin: 22px 0 25px; font: 600 clamp(62px, 8.2vw, 112px)/.93 var(--font-display, sans-serif); letter-spacing: -.025em; text-transform: uppercase; }
+  h1 span { color: #666b5e; }
+  .intro { max-width: 600px; font: 400 clamp(16px, 1.6vw, 19px)/1.7 var(--font-body, sans-serif); }
+  .draft-note { display: flex; align-items: flex-start; gap: 18px; padding: 25px 27px; border: 1px solid #c9cebe; background: #e7ebdf; margin-bottom: 68px; max-width: 950px; }
+  .status-dot { width: 7px; height: 7px; flex: 0 0 7px; background: #627742; border-radius: 50%; margin-top: 7px; }
+  .draft-note h2 { margin: 0 0 8px; font: 700 13px/1.5 var(--font-body, sans-serif); }
+  .draft-note p { margin: 0; max-width: 760px; font: 400 12px/1.85 var(--font-body, sans-serif); color: #51574a; }
+  .privacy-grid { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 54px; }
+  .page-index { align-self: start; position: sticky; top: 110px; padding-top: 8px; }
+  .page-index .eyebrow { margin: 0 0 20px; color: #72796b; }
+  .page-index ol { margin: 0; padding-left: 22px; font: 500 12px/1.5 var(--font-body, sans-serif); color: #71796a; }
+  .page-index li { padding: 0 0 15px 4px; }
+  .page-index a { color: #474d40; text-decoration: none; text-underline-offset: 4px; }
+  .page-index a:hover { text-decoration: underline; }
+  .privacy-content { min-width: 0; max-width: 760px; }
+  .privacy-content section { scroll-margin-top: 110px; border-top: 1px solid #d4d5cc; padding: 28px 0 38px; }
+  .section-number { font: 600 11px/1.5 var(--font-body, sans-serif); color: #77816b; }
+  .privacy-content h2 { margin: 12px 0 22px; font: 600 clamp(29px, 3vw, 39px)/1.08 var(--font-display, sans-serif); text-transform: uppercase; letter-spacing: .01em; }
+  .privacy-content p { margin: 0 0 17px; font: 400 13px/1.9 var(--font-body, sans-serif); color: #54584d; }
+  .privacy-content strong { font-weight: 700; color: #20221f; }
+  dl { margin: 23px 0; font: 400 12px/1.8 var(--font-body, sans-serif); }
+  dt { font-weight: 700; color: #343a2d; }
+  dd { margin: 0; color: #6a7260; }
+  .pending-details > div { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-block: 13px; border-bottom: 1px solid #d9dcd1; }
+  .storage-details > div { padding-block: 17px; border-bottom: 1px solid #d9dcd1; }
+  .storage-details dt { margin-bottom: 6px; }
+  code { font-size: .95em; overflow-wrap: anywhere; }
+  .preferences-button { display: inline-flex; justify-content: space-between; align-items: center; gap: 28px; min-height: 48px; padding: 14px 20px; margin: 4px 0 23px; border: 1px solid #20221f; background: #20221f; color: #d7f0b2; cursor: pointer; font: 700 12px/1.5 var(--font-body, sans-serif); }
+  .preferences-button:hover { background: #343c2d; }
+  .preferences-button span { font-size: 20px; line-height: 1; }
+  .provider-links { list-style: none; padding: 0; margin: 22px 0; }
+  .provider-links li { border-bottom: 1px solid #d4d5cc; }
+  .provider-links a { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding-block: 13px; font: 600 12px/1.7 var(--font-body, sans-serif); color: #343e2a; text-decoration: none; }
+  .provider-links a:hover { color: #5b713d; }
+  .provider-links a > span:last-child { margin-left: auto; font-size: 19px; }
+  .new-tab { font-size: 10px; font-weight: 400; color: #6a7260; }
+  .bottom-back { margin-top: 10px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid #6a8b42; outline-offset: 5px; }
+  @media (max-width: 850px) {
+    .privacy-page { padding-top: 115px; padding-bottom: 70px; }
+    .privacy-heading { padding-top: 40px; }
+    .privacy-grid { grid-template-columns: 1fr; gap: 34px; }
+    .page-index { position: static; }
+    .page-index ol { columns: 2; column-gap: 30px; }
+    .draft-note { margin-bottom: 36px; }
+    .privacy-content { max-width: none; }
+  }
+  @media (max-width: 480px) {
+    .draft-note { padding: 21px 18px; gap: 12px; }
+    .pending-details > div { grid-template-columns: 1fr; gap: 3px; }
+    .page-index ol { columns: 1; }
+    .page-index li { padding-bottom: 10px; }
+  }
+</style>

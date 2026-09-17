@@ -1,0 +1,20 @@
+---
+import { whatsappUrl } from '../config/contact';
+import Arrow from './Arrow.astro';
+interface Props { location: string; label?: string; variant?: 'primary' | 'outline'; compact?: boolean; }
+const { location, label = 'Quiero información', variant = 'primary', compact = false } = Astro.props;
+---
+<a class:list={['cta', `cta--${variant}`, { 'cta--compact': compact }]} href={whatsappUrl ?? '/#contacto'} target={whatsappUrl ? '_blank' : undefined} rel={whatsappUrl ? 'noopener noreferrer' : undefined} data-cta-location={location} data-whatsapp-ready={String(Boolean(whatsappUrl))}>
+  <span>{label}</span><Arrow diagonal />
+  {whatsappUrl && <span class="sr-only">por WhatsApp (se abre en una nueva pestaña)</span>}
+</a>
+<style>
+  .cta { display:inline-flex; justify-content:space-between; align-items:center; gap:2.5rem; min-height:56px; padding:1rem 1.4rem; background:var(--color-accent); color:#262922; border:1px solid var(--color-accent); font-size:11px; font-weight:700; line-height:1.4; letter-spacing:.055em; text-transform:uppercase; transition:background .25s, transform .25s, border-color .25s; }
+  .cta:hover { background:#e4f8c6; border-color:#e4f8c6; transform:translateY(-2px); }
+  .cta:active { transform:translateY(0); }
+  .cta :global(svg) { flex-shrink:0; transition:transform .25s; }
+  .cta:hover :global(svg) { transform:translate(2px,-2px); }
+  .cta--outline { background:transparent; border-color:var(--color-line); color:inherit; }
+  .cta--outline:hover { background:var(--color-accent); color:#262922; }
+  .cta--compact { min-height:44px; padding:.7rem 1rem; gap:1.5rem; font-size:10px; }
+</style>

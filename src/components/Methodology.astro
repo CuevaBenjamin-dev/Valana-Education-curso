@@ -1,0 +1,16 @@
+---
+import { methodology } from '../data/course';
+import SectionLabel from './SectionLabel.astro';
+import Arrow from './Arrow.astro';
+---
+<section id="metodologia" class="section methodology" data-analytics-section="methodology" aria-labelledby="methodology-title">
+  <div class="container"><SectionLabel number="04" text="ASÍ VAMOS A APRENDER"/>
+    <div class="methodology-heading" data-reveal><h2 id="methodology-title" class="display section-title">LA TEORÍA ABRE LA PUERTA.<br/><span>LA PRÁCTICA TE HACE AVANZAR.</span></h2><p>No se trata de memorizar herramientas.<br/>Se trata de saber qué hacer con ellas.</p></div>
+    <ol class="methodology-steps">{methodology.map((step,index) => <li data-reveal style={`--reveal-delay: ${index * 80}ms`}><div class="step-top"><span class="eyebrow">PASO {step.number}</span><Arrow/></div><h3 class="display">{step.title}</h3><p>{step.description}</p></li>)}</ol>
+  </div>
+</section>
+<style>
+  .methodology { background:#292c27; }.methodology-heading { display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; }.section-title { font-size:clamp(2.7rem,4.8vw,4.6rem); }.section-title>span { color:var(--color-muted); }.methodology-heading>p { color:var(--color-muted); font-size:11px; }.methodology-steps { display:grid; grid-template-columns:repeat(4,1fr); margin-top:3.5rem; }.methodology-steps li { border-top:1px solid var(--color-line); padding:1.3rem 1.6rem 0; border-right:1px solid var(--color-line); }.methodology-steps li:first-child { padding-left:0; }.methodology-steps li:last-child { border-right:0; padding-right:0; }.step-top { display:flex; justify-content:space-between; align-items:center; }.step-top>span { color:var(--color-accent); font-size:8px; }.step-top :global(svg) { color:var(--color-muted); width:18px; }.methodology-steps h3 { margin-top:2rem; font-size:32px; font-weight:500; }.methodology-steps p { margin-top:.9rem; max-width:235px; font-size:11px; color:var(--color-muted); }
+  @media(max-width:899px) { .methodology-heading { align-items:flex-start; flex-direction:column; }.methodology-steps li { padding-inline:1rem; }.methodology-steps h3 { font-size:28px; } }
+  @media(max-width:599px) { .methodology-steps { grid-template-columns:1fr; margin-top:2rem; }.methodology-steps li { position:relative; padding:1.2rem 0 1.5rem 54px !important; border-right:0; }.step-top>span { position:absolute; top:1.7rem; left:0; font-size:7px; }.step-top :global(svg) { position:absolute; top:1.6rem; right:0; transform:rotate(90deg); }.methodology-steps h3 { margin:0; font-size:31px; }.methodology-steps p { max-width:unset; padding-right:1.5rem; margin-top:.6rem; font-size:12px; } }
+</style>

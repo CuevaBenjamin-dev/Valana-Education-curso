@@ -1,0 +1,34 @@
+---
+import { course, instructor } from '../data/course';
+import CTAButton from './CTAButton.astro';
+import InstructorPortrait from './InstructorPortrait.astro';
+import Arrow from './Arrow.astro';
+---
+<section id="curso" class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero-topline eyebrow"><span><i></i> FORMACIÓN PARA EL MUNDO REAL</span><span>APRENDE HOY. APLICA CADA DÍA.</span></div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="hero-kicker eyebrow"><span>CURSO PRÁCTICO</span><span>DESDE CERO</span></div>
+        <h1 id="hero-title" class="display" aria-label={course.title}><span>INTELIGENCIA</span><span>ARTIFICIAL<span class="title-dot" aria-hidden="true">.</span></span><span class="hero-title-secondary">Y DIGITALIZACIÓN</span><span class="hero-title-context">PARA EL TRABAJO Y LOS NEGOCIOS</span></h1>
+        <p class="hero-description">{course.description}</p>
+        <div class="hero-cta"><CTAButton location="hero"/><a class="hero-explore" href="#contenido">Explorar el curso <span aria-hidden="true">↓</span></a></div>
+        <div class="hero-instructor"><span class="eyebrow">DICTADO POR</span><div><strong>{instructor.name}</strong><p>{instructor.role}</p></div></div>
+      </div>
+      <div class="hero-visual"><InstructorPortrait/><span class="visual-footnote eyebrow">LA TECNOLOGÍA CAMBIA. TU FORMA DE TRABAJAR TAMBIÉN.</span></div>
+    </div>
+    <div class="hero-facts"><div><span class="eyebrow">01 / ENFOQUE</span><span>Aprender haciendo</span></div><div><span class="eyebrow">02 / PUNTO DE PARTIDA</span><span>Sin saber programar</span></div><div><span class="eyebrow">03 / OBJETIVO</span><span>Resolver trabajo real</span></div><a href="#contexto" aria-label="Descubrir cómo puede ayudarte la inteligencia artificial"><Arrow/></a></div>
+  </div>
+</section>
+<style>
+  .hero { padding-bottom:0; }.hero-topline { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1.35rem 0; color:var(--color-muted); font-size:8px; border-bottom:1px solid var(--color-line); }.hero-topline span:first-child { display:flex; align-items:center; gap:.6rem; }.hero-topline i { width:5px; height:5px; border-radius:50%; background:var(--color-accent); }
+  .hero-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:4.5%; padding:3rem 0 3.2rem; }.hero-kicker { display:flex; gap:1.3rem; align-items:center; margin-bottom:1.4rem; font-size:9px; color:var(--color-muted); }.hero-kicker span:first-child { color:var(--color-accent); }.hero-kicker span+span { border-left:1px solid var(--color-line); padding-left:1.3rem; }
+  h1 { font-size:clamp(5rem,8.5vw,8.3rem); line-height:.88; letter-spacing:-.018em; }h1>span { display:block; }.title-dot { color:var(--color-accent); }.hero-title-secondary { margin-top:.18em; font-size:.585em; line-height:1; font-weight:500; }.hero-title-context { margin-top:1.1rem; font-family:var(--font-body); font-size:clamp(.68rem,1.19vw,1.15rem); font-weight:500; letter-spacing:.03em; line-height:1.5; }
+  .hero-description { max-width:430px; margin-top:1.6rem; color:var(--color-muted); font-size:12px; line-height:1.85; }.hero-cta { display:flex; align-items:center; gap:1.6rem; flex-wrap:wrap; margin-top:1.8rem; }.hero-explore { display:inline-flex; align-items:center; gap:1rem; font-size:10px; min-height:44px; }.hero-explore:hover { color:var(--color-accent); }.hero-explore span { font-size:17px; }
+  .hero-instructor { display:flex; align-items:flex-start; gap:1.5rem; margin-top:2.25rem; }.hero-instructor>.eyebrow { color:var(--color-muted); font-size:7px; padding-top:5px; }.hero-instructor strong { font-size:12px; font-weight:600; }.hero-instructor p { font-size:9px; color:var(--color-muted); max-width:250px; margin-top:.15rem; }
+  .hero-visual { position:relative; padding-bottom:1.5rem; min-width:0; }.visual-footnote { position:absolute; bottom:0; font-size:6px; color:var(--color-muted); letter-spacing:.13em; }
+  .hero-facts { display:grid; grid-template-columns:repeat(3,1fr) 64px; border-top:1px solid var(--color-line); }.hero-facts>div { display:flex; gap:.5rem; flex-direction:column; padding:1.35rem 1.8rem; border-right:1px solid var(--color-line); }.hero-facts>div:first-child { padding-left:0; }.hero-facts .eyebrow { color:var(--color-muted); font-size:7px; }.hero-facts>div>span:last-child { font-size:12px; }.hero-facts>a { display:grid; place-items:center; }.hero-facts>a :global(svg) { transform:rotate(90deg); width:22px; height:22px; }
+  @media(min-width:1500px) { .hero-grid { padding-block:4rem; } }
+  @media(max-width:1050px) { .hero-grid { gap:3%; grid-template-columns:1.3fr 1fr; }h1 { font-size:9.5vw; }.hero-cta { gap:1rem; }.hero-cta :global(.cta) { gap:1rem; padding-inline:1rem; font-size:10px; } }
+  @media(max-width:699px) { .hero-topline { padding-block:1rem; font-size:7px; }.hero-topline>span:last-child { display:none; }.hero-grid { grid-template-columns:1fr; gap:2.3rem; padding-block:2rem 1.8rem; }.hero-kicker { margin-bottom:1.25rem; font-size:8px; }h1 { font-size:clamp(4.65rem,16vw,7.4rem); line-height:.89; }.hero-title-secondary { font-size:.61em; }.hero-title-context { font-size:clamp(.65rem,2.25vw,.95rem); margin-top:1rem; }.hero-description { font-size:12px; margin-top:1.3rem; max-width:440px; }.hero-cta { gap:1.15rem; margin-top:1.5rem; }.hero-cta :global(.cta) { gap:1.2rem; min-height:54px; padding-inline:1.15rem; }.hero-explore { font-size:9px; gap:.6rem; }.hero-instructor { margin-top:1.6rem; gap:1rem; }.hero-instructor p { max-width:215px; }.hero-visual { padding-bottom:1.3rem; }.hero-facts { grid-template-columns:repeat(3,1fr); }.hero-facts>div { padding:1rem .7rem; gap:.3rem; }.hero-facts>div:nth-child(3) { border-right:0; }.hero-facts .eyebrow { font-size:6px; letter-spacing:.045em; }.hero-facts>div>span:last-child { font-size:9px; }.hero-facts>a { display:none; } }
+</style>

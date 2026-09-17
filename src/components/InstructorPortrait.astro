@@ -1,0 +1,25 @@
+---
+import { instructor } from '../data/course';
+interface Props { variant?: 'hero' | 'instructor'; }
+const { variant = 'hero' } = Astro.props;
+---
+<figure class:list={['portrait', `portrait--${variant}`, { 'portrait--real': Boolean(instructor.portrait.src) }]}>
+  <div class="portrait-grid" aria-hidden="true"></div>
+  <span class="portrait-word display" aria-hidden="true">{variant === 'hero' ? 'IA' : 'HUMANO'}</span>
+  <div class="portrait-meta eyebrow"><span>TECNOLOGÍA CON PROPÓSITO</span><span aria-hidden="true">↗</span></div>
+  {instructor.portrait.src ? <img src={instructor.portrait.src} alt={instructor.portrait.alt} width={instructor.portrait.width} height={instructor.portrait.height} loading={variant === 'hero' ? 'eager' : 'lazy'} decoding="async" /> : <div class="portrait-placeholder"><span class="portrait-cross" aria-hidden="true"></span><span>Fotografía de<br/><strong>{instructor.name}</strong></span><small>ESPACIO RESERVADO · RETRATO PRÓXIMAMENTE</small></div>}
+  <figcaption><span class="portrait-status"><i></i>{variant === 'hero' ? 'TU PRÓXIMO DOCENTE' : 'DE LA PRÁCTICA A LA ENSEÑANZA'}</span><span class="portrait-caption-name">{instructor.name}</span><span class="portrait-corner" aria-hidden="true">+</span></figcaption>
+</figure>
+<style>
+  .portrait { position:relative; isolation:isolate; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; margin:0; min-height:430px; height:100%; background:#2b2e28; border:1px solid var(--color-line); }
+  .portrait-grid { position:absolute; inset:0; z-index:-1; background-image:linear-gradient(rgb(242 240 233 / 4%) 1px, transparent 1px),linear-gradient(90deg,rgb(242 240 233 / 4%) 1px,transparent 1px); background-size:25% 25%; }
+  .portrait-word { position:absolute; z-index:-1; top:7%; left:50%; transform:translateX(-50%); font-size:clamp(19rem,31vw,30rem); color:#373b32; line-height:.95; letter-spacing:-.055em; }
+  .portrait-meta { display:flex; align-items:center; justify-content:space-between; padding:1.3rem 1.5rem; font-size:8px; color:var(--color-muted); }.portrait-meta span:last-child { font-size:24px; color:var(--color-accent); font-weight:400; }
+  .portrait-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; text-align:center; margin:2rem 1rem; color:#bdc1b6; font-size:12px; line-height:1.65; }.portrait-placeholder strong { font-weight:500; }.portrait-placeholder small { font-size:6px; letter-spacing:.16em; color:#b4b7ae; }
+  .portrait-cross { position:relative; width:42px; height:42px; margin-bottom:.35rem; }.portrait-cross::before,.portrait-cross::after { content:''; position:absolute; background:#8d9583; }.portrait-cross::before { height:1px; width:42px; top:20px; }.portrait-cross::after { width:1px; height:42px; left:20px; }
+  figcaption { position:relative; margin:0 1.5rem; padding:1.3rem 0 1.5rem; border-top:1px solid var(--color-line); }.portrait-status { display:flex; align-items:center; gap:.5rem; font-size:7px; letter-spacing:.1em; color:var(--color-muted); }.portrait-status i { display:block; width:5px; height:5px; background:var(--color-accent); border-radius:50%; }.portrait-caption-name { display:block; margin-top:.6rem; font-size:21px; letter-spacing:-.035em; }.portrait-corner { position:absolute; right:0; bottom:1.7rem; color:var(--color-accent); font-size:22px; font-weight:300; }
+  .portrait img { position:absolute; inset:0; z-index:-1; width:100%; height:100%; object-fit:cover; object-position:center 25%; }.portrait--real figcaption { background:rgb(32 34 31 / 88%); padding-inline:1rem; }.portrait--real .portrait-corner { right:1rem; }.portrait--real .portrait-meta { background:rgb(32 34 31 / 85%); }
+  .portrait--instructor { min-height:460px; }.portrait--instructor .portrait-word { font-size:clamp(8rem,14vw,15rem); top:20%; writing-mode:vertical-rl; left:43%; line-height:.9; }
+  @media(max-width:699px) { .portrait--hero { min-height:290px; }.portrait--hero .portrait-word { font-size:23rem; top:-8%; }.portrait--hero .portrait-meta { padding:.8rem 1.2rem; }.portrait--hero .portrait-placeholder { margin:.5rem 1rem 1.5rem; gap:.5rem; }.portrait--hero figcaption { margin-inline:1.2rem; padding:.8rem 0 1rem; }.portrait--hero .portrait-caption-name { font-size:18px; }.portrait--hero .portrait-cross { width:28px; height:28px; }.portrait--hero .portrait-cross::before { width:28px; top:14px; }.portrait--hero .portrait-cross::after { height:28px; left:14px; }.portrait--instructor { min-height:370px; }.portrait--instructor .portrait-word { font-size:9rem; top:14%; writing-mode:horizontal-tb; left:50%; } }
+</style>
+

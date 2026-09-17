@@ -1,0 +1,51 @@
+<aside
+  class="consent"
+  data-consent-banner
+  aria-labelledby="consent-title"
+  tabindex="-1"
+  hidden
+>
+  <p class="consent__eyebrow">TÚ ELIGES</p>
+  <h2 id="consent-title">Un poco de contexto.</h2>
+  <p class="consent__copy">
+    Con tu permiso usamos herramientas de analítica y publicidad para entender
+    cómo se visita este curso. Puedes seguir con solo lo esencial.
+    <a href="/privacidad">Ver privacidad</a>.
+  </p>
+  <div class="consent__actions">
+    <button type="button" data-consent-accept>ACEPTAR</button>
+    <button type="button" data-consent-essential>SOLO ESENCIALES</button>
+  </div>
+</aside>
+
+<script>
+  import { initAnalytics } from '../lib/analytics';
+  initAnalytics();
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    z-index: 100;
+    inset: auto auto max(1rem, env(safe-area-inset-bottom)) 1rem;
+    width: min(410px, calc(100vw - 2rem));
+    padding: 1.3rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-body);
+  }
+
+  .consent[hidden] { display: none; }
+  .consent__eyebrow { margin: 0 0 .5rem; color: var(--color-accent); font-size: .65rem; font-weight: 600; letter-spacing: .15em; }
+  .consent h2 { margin: 0; font-family: var(--font-display); font-size: 1.65rem; font-weight: 600; line-height: 1.1; }
+  .consent__copy { margin: .75rem 0 1rem; font-size: .8rem; line-height: 1.65; color: var(--color-muted); }
+  .consent__copy a { color: var(--color-text); text-decoration: underline; text-underline-offset: 3px; }
+  .consent__actions { display: flex; gap: .6rem; }
+  .consent__actions button { flex: 1; min-height: 44px; padding: .7rem .45rem; border: 1px solid var(--color-line); background: transparent; color: var(--color-text); font: 600 .62rem/1.2 var(--font-body); letter-spacing: .075em; cursor: pointer; transition: background .2s, border-color .2s; }
+  .consent__actions button:first-child { background: var(--color-accent); color: var(--color-bg); border-color: var(--color-accent); }
+  .consent__actions button:hover { border-color: var(--color-text); }
+  .consent__actions button:first-child:hover { background: var(--color-text); }
+  .consent :focus-visible, .consent:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+  @media (prefers-reduced-motion: reduce) { .consent__actions button { transition: none; } }
+</style>

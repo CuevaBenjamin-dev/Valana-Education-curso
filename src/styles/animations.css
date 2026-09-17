@@ -1,0 +1,6 @@
+[data-reveal] { transition: opacity .75s var(--ease-out), transform .75s var(--ease-out); transition-delay: var(--reveal-delay, 0ms); }
+.motion-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: translateY(20px); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0ms !important; scroll-behavior: auto !important; }
+  .motion-ready [data-reveal]:not(.is-visible) { opacity: 1; transform: none; }
+}

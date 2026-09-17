@@ -1,0 +1,58 @@
+---
+import '@fontsource/barlow-condensed/latin-600.css';
+import '@fontsource/manrope/latin-400.css';
+import '@fontsource/manrope/latin-600.css';
+import '../styles/global.css';
+import { site } from '../config/site';
+import AnalyticsConsent from '../components/AnalyticsConsent.astro';
+interface Props { title?: string; description?: string; noindex?: boolean; }
+const { title = site.title, description = site.description, noindex = false } = Astro.props;
+const canonical = site.url ? new URL(Astro.url.pathname, site.url).href : undefined;
+const ogImage = site.url ? new URL(site.ogImage, site.url).href : site.ogImage;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#20221f" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+    <title>{title}</title>
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ESCS — Inteligencia Artificial y Digitalización para el Trabajo y los Negocios" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
+    <slot />
+    <AnalyticsConsent />
+    <script>
+      const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+      if (!motionPreference.matches && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); } });
+        }, { threshold: .08, rootMargin: '0px 0px -24px 0px' });
+        document.querySelectorAll('[data-reveal]').forEach(element => revealObserver.observe(element));
+        document.documentElement.classList.add('motion-ready');
+        motionPreference.addEventListener('change', event => { if (event.matches) { document.documentElement.classList.remove('motion-ready'); revealObserver.disconnect(); } });
+      }
+      document.querySelectorAll<HTMLDetailsElement>('details[data-accordion]').forEach(details => {
+        details.addEventListener('toggle', () => details.querySelector('summary')?.setAttribute('aria-expanded', String(details.open)));
+      });
+    </script>
+  </body>
+</html>

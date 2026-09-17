@@ -1,0 +1,16 @@
+---
+import { outcomes } from '../data/course';
+import SectionLabel from './SectionLabel.astro';
+---
+<section id="aprendizajes" class="section outcomes" data-analytics-section="outcomes" aria-labelledby="outcomes-title">
+  <div class="container"><SectionLabel number="02" text="LO QUE TE LLEVAS"/>
+    <div class="outcomes-heading" data-reveal><h2 id="outcomes-title" class="display section-title">HABILIDADES NUEVAS.<br/><span>POSIBILIDADES REALES.</span></h2><p>Del «¿qué le pregunto?» al<br/>«esto me sirve para mi trabajo».</p></div>
+    <div class="outcomes-grid">{outcomes.map((item, index) => <article class="outcome" data-reveal style={`--reveal-delay: ${(index % 3) * 70}ms`}><span class="outcome-number display">{item.number}<span aria-hidden="true"> /</span></span><h3>{item.title}</h3><p>{item.description}</p></article>)}</div>
+  </div>
+</section>
+<style>
+  .outcomes-heading { display:flex; justify-content:space-between; gap:2rem; align-items:flex-end; margin-bottom:3rem; }.section-title { font-size:clamp(3rem,5.5vw,5.2rem); }.section-title span { color:var(--color-muted); }.outcomes-heading>p { font-size:12px; color:var(--color-muted); padding-bottom:.3rem; }
+  .outcomes-grid { display:grid; grid-template-columns:repeat(3,1fr); }.outcome { padding:2rem 2rem 2.5rem; border-top:1px solid var(--color-line); border-right:1px solid var(--color-line); }.outcome:nth-child(3n+1) { padding-left:0; }.outcome:nth-child(3n) { border-right:0; }.outcome-number { display:block; font-size:40px; color:var(--color-accent); line-height:1; }.outcome-number>span { color:#535a4c; font-weight:400; font-size:26px; }.outcome h3 { margin-top:1.6rem; font-size:16px; font-weight:500; line-height:1.5; letter-spacing:-.03em; }.outcome p { max-width:310px; margin-top:.6rem; font-size:12px; color:var(--color-muted); line-height:1.85; }
+  @media(max-width:899px) { .outcomes-heading { align-items:flex-start; flex-direction:column; }.outcomes-heading>p br { display:none; }.outcome { padding:1.6rem 1.2rem 2rem; } }
+  @media(max-width:599px) { .outcomes-grid { grid-template-columns:1fr 1fr; }.outcome { padding:1.4rem 1rem 1.7rem; }.outcome:nth-child(3n+1) { padding-left:1rem; }.outcome:nth-child(3n) { border-right:1px solid var(--color-line); }.outcome:nth-child(odd) { padding-left:0; border-right:1px solid var(--color-line); }.outcome:nth-child(even) { border-right:0; padding-right:0; }.outcome h3 { font-size:15px; margin-top:1.2rem; }.outcome p { font-size:11px; }.outcome-number { font-size:36px; }.outcomes-heading { margin-bottom:2rem; gap:1.2rem; } }
+</style>

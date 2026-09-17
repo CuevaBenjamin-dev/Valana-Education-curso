@@ -1,0 +1,18 @@
+---
+import { problemItems } from '../data/course';
+import SectionLabel from './SectionLabel.astro';
+---
+<section id="contexto" class="section section--paper" data-analytics-section="problem" aria-labelledby="problem-title">
+  <div class="container">
+    <SectionLabel number="01" text="EL PUNTO DE PARTIDA"/>
+    <div class="problem-grid">
+      <div data-reveal><h2 id="problem-title" class="display section-title">EL TRABAJO<br/>CAMBIÓ.<br/><span>¿Y TU FORMA<br/>DE HACERLO?</span></h2><p class="problem-intro">La IA no sirve solamente para hacer preguntas. Bien utilizada, puede ayudarte a trabajar mejor.</p><span class="problem-note eyebrow">MENOS REPETIR. MÁS RESOLVER.</span></div>
+      <div class="problem-list">{problemItems.map(item => <div class="problem-item" data-reveal><span class="eyebrow">{item.number}</span><div><h3>{item.title}</h3><p>{item.description}</p></div><span class="item-mark" aria-hidden="true">↗</span></div>)}</div>
+    </div>
+  </div>
+</section>
+<style>
+  .problem-grid { display:grid; grid-template-columns:1fr 1fr; gap:10%; }.section-title { font-size:clamp(3.4rem,6.2vw,6rem); }.section-title>span { color:#747a6d; }.problem-intro { max-width:325px; margin-top:1.8rem; font-size:13px; line-height:1.8; }.problem-note { display:block; margin-top:2rem; font-size:8px; color:var(--color-muted); }
+  .problem-list { border-top:1px solid var(--color-line); }.problem-item { display:grid; grid-template-columns:22px 1fr 20px; gap:1.3rem; padding:1.65rem 0; border-bottom:1px solid var(--color-line); }.problem-item>.eyebrow { color:var(--color-muted); padding-top:.15rem; font-size:9px; }.problem-item h3 { font-size:17px; font-weight:600; letter-spacing:-.04em; line-height:1.4; }.problem-item p { color:var(--color-muted); margin-top:.6rem; font-size:12px; line-height:1.8; }.item-mark { color:#757e68; font-size:18px; }
+  @media(max-width:699px) { .problem-grid { grid-template-columns:1fr; gap:2.5rem; }.section-title { font-size:clamp(3.5rem,13vw,5.4rem); }.problem-intro { max-width:400px; }.problem-note { margin-top:1.3rem; }.problem-item { padding:1.3rem 0; gap:1rem; }.problem-item h3 { font-size:16px; } }
+</style>
