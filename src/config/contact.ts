@@ -1,6 +1,6 @@
 /** El número definitivo se configura durante el build; nunca se distribuye entre componentes. */
 export const contact = {
-  whatsappNumber: import.meta.env.PUBLIC_WHATSAPP_NUMBER || '',
+  whatsappNumber: import.meta.env?.PUBLIC_WHATSAPP_NUMBER || '',
   defaultMessage:
     'Hola, vi el curso de Inteligencia Artificial y Digitalización para el Trabajo y los Negocios y quisiera recibir más información.',
 };

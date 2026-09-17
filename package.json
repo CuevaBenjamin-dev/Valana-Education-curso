@@ -7,7 +7,12 @@
     "dev": "astro dev --host 0.0.0.0",
     "check": "astro check",
     "build": "astro build",
-    "preview": "astro preview --host 0.0.0.0"
+    "preview": "astro preview --host 0.0.0.0",
+    "test": "node --experimental-strip-types --test src/lib/analytics/analytics.test.ts tests/contact.test.ts",
+    "test:e2e": "node tests/e2e.mjs",
+    "test:analytics": "node tests/analytics-browser.mjs",
+    "og": "node scripts/generate-og.mjs",
+    "audit:lighthouse": "node scripts/lighthouse.mjs"
   },
   "engines": {
     "node": ">=22.12.0"
@@ -23,6 +28,7 @@
     "@playwright/test": "^1.63.0",
     "@types/node": "^22.20.3",
     "lighthouse": "^13.4.1",
+    "sharp": "^0.35.4",
     "typescript": "^6.0.3"
   }
 }

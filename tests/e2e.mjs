@@ -87,7 +87,7 @@ try {
       }
 
       if (route === '/' && [390, 1440].includes(width)) {
-        const summaries = page.locator('[data-accordion] > summary');
+        const summaries = page.locator('[data-faq-id] > summary');
         for (let index = 0; index < await summaries.count(); index++) {
           const summary = summaries.nth(index);
           await summary.focus();
@@ -98,10 +98,26 @@ try {
           await page.waitForTimeout(60);
           check(`home / ${width}px / FAQ ${index + 1} closes with Space`, await summary.getAttribute('aria-expanded') === 'false' && await summary.evaluate((element) => !element.parentElement.open));
         }
+        const sessions = page.locator('.session[data-accordion] > summary');
+        for (let index = 0; index < await sessions.count(); index++) {
+          const summary = sessions.nth(index);
+          const initialOpen = await summary.evaluate((element) => element.parentElement.open);
+          check(`home / ${width}px / curriculum ${index + 1} initial aria matches state`, await summary.getAttribute('aria-expanded') === String(initialOpen));
+          await summary.focus();
+          await page.keyboard.press('Enter');
+          await page.waitForTimeout(60);
+          check(`home / ${width}px / curriculum ${index + 1} toggles with Enter`, await summary.getAttribute('aria-expanded') === String(!initialOpen) && await summary.evaluate((element) => element.parentElement.open) === !initialOpen);
+          await page.keyboard.press('Space');
+          await page.waitForTimeout(60);
+          check(`home / ${width}px / curriculum ${index + 1} restores with Space`, await summary.getAttribute('aria-expanded') === String(initialOpen) && await summary.evaluate((element) => element.parentElement.open) === initialOpen);
+        }
       }
 
       if ([390, 1440].includes(width)) {
-        await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+        await page.evaluate(() => {
+          if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        });
         await page.waitForTimeout(150);
         const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
         const violations = results.violations.map(({ id, impact, description, help, helpUrl, nodes }) => ({ id, impact, description, help, helpUrl, nodes: nodes.map(({ html, target, failureSummary }) => ({ html, target, failureSummary })) }));
@@ -129,7 +145,7 @@ try {
 
   await page.getByRole('link', { name: 'Privacidad', exact: true }).click();
   await page.waitForURL(/\/privacidad\/?$/);
-  check('Privacy navigation / footer opens privacy page', await page.locator('h1').innerText().then((text) => /Tu privacidad/i.test(text)));
+  check('Privacy navigation / footer opens privacy page', await page.locator('main h1').innerText().then((text) => /Tu privacidad/i.test(text)));
   check('Privacy navigation / draft has noindex', await page.locator('meta[name="robots"]').getAttribute('content').then((value) => value.includes('noindex')));
   await page.locator('.menu-toggle').click();
   await page.locator('#mobile-nav').getByRole('link', { name: /Contenido/ }).click();

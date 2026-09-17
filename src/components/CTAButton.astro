@@ -3,8 +3,9 @@ import { whatsappUrl } from '../config/contact';
 import Arrow from './Arrow.astro';
 interface Props { location: string; label?: string; variant?: 'primary' | 'outline'; compact?: boolean; }
 const { location, label = 'Quiero información', variant = 'primary', compact = false } = Astro.props;
+const pendingContact = Astro.url.pathname === '/' ? '#contacto' : '/#contacto';
 ---
-<a class:list={['cta', `cta--${variant}`, { 'cta--compact': compact }]} href={whatsappUrl ?? '/#contacto'} target={whatsappUrl ? '_blank' : undefined} rel={whatsappUrl ? 'noopener noreferrer' : undefined} data-cta-location={location} data-whatsapp-ready={String(Boolean(whatsappUrl))}>
+<a class:list={['cta', `cta--${variant}`, { 'cta--compact': compact }]} href={whatsappUrl ?? pendingContact} target={whatsappUrl ? '_blank' : undefined} rel={whatsappUrl ? 'noopener noreferrer' : undefined} data-cta-location={location} data-whatsapp-ready={String(Boolean(whatsappUrl))}>
   <span>{label}</span><Arrow diagonal />
   {whatsappUrl && <span class="sr-only">por WhatsApp (se abre en una nueva pestaña)</span>}
 </a>

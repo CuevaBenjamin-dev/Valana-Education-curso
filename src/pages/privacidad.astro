@@ -61,7 +61,7 @@ import Footer from '../components/Footer.astro';
             <span class="section-number" aria-hidden="true">02</span>
             <h2 id="datos-title">Qué información se utiliza</h2>
             <p>Esta landing presenta el curso de IA y digitalización. No contiene un formulario de registro ni un sistema propio de recepción de solicitudes. El contacto se realiza mediante un enlace a WhatsApp que tú decides abrir.</p>
-            <p>La página conserva tu elección de consentimiento para recordar tus preferencias. Esta función esencial no activa rastreadores ni envía información a servicios de analítica o publicidad.</p>
+            <p>Cuando hay herramientas de medición configuradas, la página conserva tu elección de consentimiento para recordar tus preferencias. Esta función esencial no activa rastreadores ni envía información a servicios de analítica o publicidad.</p>
             <p>Si aceptas la medición y las herramientas están configuradas, Microsoft Clarity puede medir el uso de la página y Meta Pixel puede registrar visitas e interacciones para evaluar campañas. Estos proveedores pueden tratar información del dispositivo, navegador, dirección IP e interacción según sus propias condiciones y configuración.</p>
             <p>Solo con tu consentimiento se guardan durante la sesión parámetros de campaña UTM saneados, si existen en la dirección de entrada. Se utilizan para reconocer el origen de una visita; no se solicita que incluyas datos personales en ellos.</p>
             <p>El proveedor de alojamiento puede generar registros técnicos al servir la página. Su identidad, el alcance de esos registros y sus plazos de conservación están pendientes de confirmar.</p>
@@ -71,7 +71,7 @@ import Footer from '../components/Footer.astro';
             <span class="section-number" aria-hidden="true">03</span>
             <h2 id="preferencias-title">Tú eliges si se mide tu visita</h2>
             <p>Microsoft Clarity y Meta Pixel solo se activan después de aceptar. Puedes rechazar las herramientas opcionales y seguir consultando la información del curso.</p>
-            <p>Puedes volver a abrir las preferencias desde el enlace del pie de página o desde este botón:</p>
+            <p>Cuando estén habilitadas las herramientas de medición, podrás gestionar tus preferencias desde esta página y el pie del sitio.</p>
             <button type="button" class="preferences-button" data-consent-settings>
               Gestionar mis preferencias <span aria-hidden="true">↗</span>
             </button>
@@ -143,20 +143,20 @@ import Footer from '../components/Footer.astro';
   .draft-note p { margin: 0; max-width: 760px; font: 400 12px/1.85 var(--font-body, sans-serif); color: #51574a; }
   .privacy-grid { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 54px; }
   .page-index { align-self: start; position: sticky; top: 110px; padding-top: 8px; }
-  .page-index .eyebrow { margin: 0 0 20px; color: #72796b; }
+  .page-index .eyebrow { margin: 0 0 20px; color: #606956; }
   .page-index ol { margin: 0; padding-left: 22px; font: 500 12px/1.5 var(--font-body, sans-serif); color: #71796a; }
   .page-index li { padding: 0 0 15px 4px; }
   .page-index a { color: #474d40; text-decoration: none; text-underline-offset: 4px; }
   .page-index a:hover { text-decoration: underline; }
   .privacy-content { min-width: 0; max-width: 760px; }
   .privacy-content section { scroll-margin-top: 110px; border-top: 1px solid #d4d5cc; padding: 28px 0 38px; }
-  .section-number { font: 600 11px/1.5 var(--font-body, sans-serif); color: #77816b; }
+  .section-number { font: 600 11px/1.5 var(--font-body, sans-serif); color: #606956; }
   .privacy-content h2 { margin: 12px 0 22px; font: 600 clamp(29px, 3vw, 39px)/1.08 var(--font-display, sans-serif); text-transform: uppercase; letter-spacing: .01em; }
   .privacy-content p { margin: 0 0 17px; font: 400 13px/1.9 var(--font-body, sans-serif); color: #54584d; }
   .privacy-content strong { font-weight: 700; color: #20221f; }
   dl { margin: 23px 0; font: 400 12px/1.8 var(--font-body, sans-serif); }
   dt { font-weight: 700; color: #343a2d; }
-  dd { margin: 0; color: #6a7260; }
+  dd { margin: 0; color: #606956; }
   .pending-details > div { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-block: 13px; border-bottom: 1px solid #d9dcd1; }
   .storage-details > div { padding-block: 17px; border-bottom: 1px solid #d9dcd1; }
   .storage-details dt { margin-bottom: 6px; }
@@ -169,7 +169,7 @@ import Footer from '../components/Footer.astro';
   .provider-links a { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding-block: 13px; font: 600 12px/1.7 var(--font-body, sans-serif); color: #343e2a; text-decoration: none; }
   .provider-links a:hover { color: #5b713d; }
   .provider-links a > span:last-child { margin-left: auto; font-size: 19px; }
-  .new-tab { font-size: 10px; font-weight: 400; color: #6a7260; }
+  .new-tab { font-size: 10px; font-weight: 400; color: #606956; }
   .bottom-back { margin-top: 10px; }
   a:focus-visible, button:focus-visible { outline: 3px solid #6a8b42; outline-offset: 5px; }
   @media (max-width: 850px) {
@@ -188,3 +188,4 @@ import Footer from '../components/Footer.astro';
     .page-index li { padding-bottom: 10px; }
   }
 </style>
+

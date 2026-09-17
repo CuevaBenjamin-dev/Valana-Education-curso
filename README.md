@@ -29,13 +29,51 @@ npm run preview
 - `build`: genera el sitio estático en `dist/`.
 - `preview`: permite revisar el contenido compilado localmente, después de `build`.
 
-Las pruebas unitarias de consentimiento, atribución, exposición y proveedores se ejecutan con Node 24:
+Las pruebas unitarias cubren consentimiento, atribución, exposición, proveedores y el helper de WhatsApp:
 
 ```sh
-node --test src/lib/analytics/analytics.test.ts
+npm test
 ```
 
-En Node 22.12, donde la ejecución directa de TypeScript todavía requiere activación explícita, utilizar `node --experimental-strip-types --test src/lib/analytics/analytics.test.ts`.
+El equivalente directo en Node 24 es `node --test src/lib/analytics/analytics.test.ts tests/contact.test.ts`. El script npm añade `--experimental-strip-types` para funcionar también en Node 22.12.
+
+### Pruebas en navegador
+
+Requieren Google Chrome instalado; Playwright lo inicia sin interfaz gráfica. No es necesario instalar un navegador adicional para estos scripts.
+
+Para la revisión responsive y de accesibilidad, dejar todas las variables de contacto y proveedores vacías, compilar y abrir una vista previa:
+
+```sh
+npm run build
+npm run preview -- --port 4321
+```
+
+En otra terminal ejecutar:
+
+```sh
+npm run test:e2e
+```
+
+Equivale a `node tests/e2e.mjs`. Utiliza `http://localhost:4321` por defecto; `TEST_BASE_URL` permite indicar otro servidor local. Comprueba la landing y privacidad a 360, 390, 430, 768, 1024, 1280 y 1440 px, overflow, controles, navegación por teclado, reduced motion, consola y ausencia de proveedores sin configurar. Las capturas y el informe se guardan en `test-results/`, excluido de Git.
+
+La integración de analítica se comprueba por separado:
+
+```sh
+npm run test:analytics
+```
+
+Equivale a `node tests/analytics-browser.mjs`. Inicia y cierra su propio servidor local en el puerto 4322; se puede cambiar con `ANALYTICS_TEST_PORT`. Utiliza IDs de prueba solo en el entorno del proceso hijo, sin modificar `.env`, y **intercepta todas las solicitudes externas**: no transmite datos a Clarity, Meta, TikTok ni WhatsApp. Comprueba consentimiento, revocación, saneamiento de URL, eventos, deduplicación y conversión utilizando SDKs simulados. No sustituye la validación posterior de los IDs reales en las herramientas de cada proveedor.
+
+Para Lighthouse móvil, con el build servido en el puerto 4323:
+
+```sh
+npm run preview -- --port 4323
+npm run audit:lighthouse
+```
+
+`TEST_BASE_URL` permite cambiar la URL de la auditoría. Los informes HTML y JSON se guardan en `test-results/`. La validación local del 17 de septiembre de 2026 obtuvo **100 rendimiento / 100 accesibilidad / 100 buenas prácticas / 100 SEO**, LCP 1,4 s y CLS 0, con los placeholders actuales y sin proveedores de analítica configurados. Las fotos, los SDKs consentidos, el alojamiento y la conexión reales pueden cambiar estas mediciones.
+
+La revisión final del build completó **132 comprobaciones E2E**, sin overflow en los siete anchos, errores de consola/red ni infracciones automáticas de accesibilidad en las páginas evaluadas. Las **14 pruebas unitarias** y la integración de consentimiento también pasaron.
 
 ## Estructura
 
@@ -117,6 +155,8 @@ Los CTA comparten la misma configuración y se identifican con `data-cta-locatio
 `src` vacío conserva el placeholder explícito **Fotografía de Benjamín Cueva**. El espacio vertical reservado evita tener que reconstruir el hero cuando llegue la imagen. No se utiliza una persona de stock ni una fotografía generada.
 
 El recurso `public/og-course.png` es la imagen social provisional. Puede reemplazarse manteniendo el nombre; revisar también el alt y los metadatos si cambia su contenido.
+
+La composición tipográfica de ese recurso está en `scripts/generate-og.mjs`; `npm run og` regenera el PNG de 1200 × 630 px.
 
 ## Analítica y consentimiento
 

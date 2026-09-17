@@ -16,9 +16,9 @@ try {
   if (String(error).includes('already in use')) throw error;
 }
 
-const server = spawn(process.execPath, ['node_modules/astro/bin/astro.mjs', 'dev', '--host', '127.0.0.1', '--port', String(port), '--ignore-lock'], {
+const server = spawn(process.execPath, ['node_modules/astro/bin/astro.mjs', 'dev', '--config', 'tests/analytics.config.mjs', '--host', '127.0.0.1', '--port', String(port), '--ignore-lock'], {
   cwd: root,
-  env: { ...process.env, PUBLIC_CLARITY_PROJECT_ID: 'testproject123', PUBLIC_META_PIXEL_ID: '123456789012345', PUBLIC_TIKTOK_PIXEL_ID: 'reserved-but-disabled' },
+  env: { ...process.env, PUBLIC_CLARITY_PROJECT_ID: 'testproject123', PUBLIC_META_PIXEL_ID: '123456789012345', PUBLIC_TIKTOK_PIXEL_ID: 'reserved-but-disabled', PUBLIC_WHATSAPP_NUMBER: '' },
   windowsHide: true,
   stdio: ['ignore', 'pipe', 'pipe'],
 });
@@ -106,7 +106,9 @@ try {
 
   const placeholderCTA = page.locator('a[data-cta-location="hero"]');
   await placeholderCTA.click();
+  await page.waitForLoadState('networkidle');
   assert.equal((await metaEvents()).includes('Contact'), false, 'unconfigured CTA is not a conversion');
+  const metaBeforeConversion = await metaEvents();
   await placeholderCTA.evaluate((link) => {
     link.href = 'https://wa.me/15555550123?text=Test';
     link.dataset.whatsappReady = 'true';
@@ -118,7 +120,7 @@ try {
   await popup.waitForLoadState('domcontentloaded');
   await popup.close();
   await waitForClarity('whatsapp_hero_click');
-  assert.deepEqual(await metaEvents(), ['PageView', 'ViewContent', 'Contact']);
+  assert.deepEqual(await metaEvents(), [...metaBeforeConversion, 'Contact']);
 
   await page.reload();
   await page.locator('[data-analytics-section="curriculum"]').scrollIntoViewIfNeeded();
@@ -128,6 +130,9 @@ try {
   assert.deepEqual(await metaEvents(), ['PageView'], 'PageView is per page; ViewContent is once per session');
 
   await page.locator('[data-consent-settings]').click();
+  await page.evaluate(() => window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('test:revocation', JSON.stringify({ clarity: window.clarity?.q?.at(-1), meta: window.fbq?.queue?.at(-1) }));
+  }));
   const beforeRevoke = external.length;
   await Promise.all([page.waitForEvent('framenavigated', (frame) => frame === page.mainFrame()), page.locator('[data-consent-essential]').click()]);
   await page.waitForLoadState('networkidle');
@@ -135,6 +140,10 @@ try {
   assert.equal(external.length, beforeRevoke, 'revocation reload does not load another SDK');
   assert.equal(await page.evaluate(() => window.clarity || window.fbq || null), null);
   assert.equal(await page.evaluate(() => sessionStorage.getItem('escs:analytics:utm:v1')), null);
+  assert.deepEqual(await page.evaluate(() => JSON.parse(sessionStorage.getItem('test:revocation'))), {
+    clarity: ['consentv2', { ad_Storage: 'denied', analytics_Storage: 'denied' }],
+    meta: ['consent', 'revoke'],
+  });
   assert.deepEqual(pageErrors, [], 'no browser runtime errors');
   console.log('PASS: no-consent / essentials / accept / consentv2 / PageView / 1s section exposure / 10s ViewContent / FAQ / placeholder & real CTA / session dedup / revoke.');
   console.log(`Intercepted ${external.length} external requests; no provider or WhatsApp request left the browser.`);
